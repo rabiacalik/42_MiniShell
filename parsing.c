@@ -12,6 +12,7 @@
 
 #include "minishell.h"
 
+// fonksiyonu, verilen inputu parçalayarak alt dizeleri oluşturur ve bu alt dizeleri g_shell.all dizisine atar. 
 void	partition(int p, int i, int j, int cnt)
 {
 	int		a;
@@ -42,6 +43,7 @@ void	partition(int p, int i, int j, int cnt)
 //This function allocates to the string parts
 //and fill them into the correct parts.
 
+//check_fill fonksiyonu, verilen inputu g_shell.in_pipe dizisine göre parçalar ve argüman sayılarını hesaplar.
 void	check_fill(char *s, int i, int j, int p)
 {
 	int	cnt;
@@ -99,6 +101,9 @@ void	split_pipe(char *s, int i)
 	}
 }
 
+//Bu add_space fonksiyonu, bir girdi stringi olan s içerisinde bulunan < (yönlendirme girişi), 
+//> (yönlendirme çıkışı) ve << (here document) karakterlerinden önce ve sonra birer boşluk karakteri ekleyerek, 
+//bu karakterleri daha rahat işlemek üzere düzenler.
 char	*add_space(char *s)
 {
 	char	*res;

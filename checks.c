@@ -12,6 +12,7 @@
 
 #include "minishell.h"
 
+// ptr ye yer ayırıp döner
 char	**command__chc(int p)
 {
 	char	**ptr;

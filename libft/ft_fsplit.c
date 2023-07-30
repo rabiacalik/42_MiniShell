@@ -30,6 +30,6 @@ char	*ft_fsplit(char *str, char c)
 	if (!str[i])
 		return (NULL);
 	s = malloc(i + 1);
-	ft_strlcpy(s, str, i + 1);
+	ft_strlcpy(s, str, i + 1); // esittire kadar olan yeri s ye kopyalıyor
 	return (s);
 }

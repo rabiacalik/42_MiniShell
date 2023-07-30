@@ -29,6 +29,7 @@ void	partition_func(char	*s, int *i, int tmp, int j) // j: max size
 	}
 }
 
+// çift tırnaklar veya tek tırnaklar içindeki metinleri atlamaktır.
 void	check_func(char *s, int i, int *a, int j)
 {
 	if (s[i + (*a)] == '\"')
@@ -62,6 +63,7 @@ void	fix_var(char *s)
 	}
 }
 
+// tek tırnak içerisinde dolar işareti varsa onu backtick yap
 void	quotes_state(char *s, int i, int *j, char c)
 {
 	(*j)++;

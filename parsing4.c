@@ -12,6 +12,7 @@
 
 #include "minishell.h"
 
+// dolar bactic space yada null görene kadar yer ayırır ve res e atr ve res i geri döndürür
 char	*cut_var(char *str)
 {
 	int		i;
@@ -31,6 +32,7 @@ char	*cut_var(char *str)
 	return (res);
 }
 
+// bize değişkenin degerini geri donmuş 
 char	*fill_it(char *str)
 {
 	int		i;

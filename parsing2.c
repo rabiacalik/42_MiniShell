@@ -12,6 +12,7 @@
 
 #include "minishell.h"
 
+// dolar işaretine kadar git ve oraya kadar yer ayır ve degeri atayıp geriye döndürür
 char	*complete(char *str)
 {
 	int		i;
@@ -31,6 +32,7 @@ char	*complete(char *str)
 	return (res);
 }
 
+//
 char	*get_varriable(char *str)
 {
 	char	*res;
@@ -59,13 +61,14 @@ char	*get_varriable(char *str)
 	return (res);
 }
 
+//Bu fonksiyonun amacı, src stringinden tırnak içi metni hariç tutarak, bu metni içermeyen new stringini oluşturmaktır. Tırnak içi metinler atlanarak, tırnak dışındaki kısmı kopyalamak için kullanılabilir.
 void	cpy_without_qoute(char *new, const char *src, char c, int i)
 {
 	while (src[i])
 	{
 		if (src[i] == '\"' || src[i] == '\'')
 		{
-			c = src[i];
+			c = src[i]; // gereksiz. bununla ilgilen !!!!!!!!!!!!!!!!!!
 			src++;
 			while (src[i] != c && src[i])
 			{
@@ -83,6 +86,7 @@ void	cpy_without_qoute(char *new, const char *src, char c, int i)
 	}
 }
 
+//Bu fonksiyonun amacı, str stringindeki tırnak içi metinleri çıkartarak sadece tırnak dışındaki metni içeren new stringini oluşturmaktır.
 char	*rm_quotes(char *str)
 {
 	char	*new;

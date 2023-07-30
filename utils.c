@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+//eger str env disi içinde varsa yani böyle bir local değişken varsa değişkenin indexini döner yoksa -1 döner
 int	env_finder(char *str)
 {
 	int		i;
