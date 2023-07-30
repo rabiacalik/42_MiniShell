@@ -32,7 +32,7 @@ char	*complete(char *str)
 	return (res);
 }
 
-//
+//Bu fonksiyonun amacı, girdi stringindeki değişken adlarını tespit ederek bu değişkenlerin değerlerini alıp yeni bir string oluşturmaktır.
 char	*get_varriable(char *str)
 {
 	char	*res;
@@ -110,6 +110,8 @@ char	*rm_quotes(char *str)
 	return (new);
 }
 
+//Bu fonksiyonun amacı, tırnak içindeki metinleri ve değişkenleri doğru bir şekilde tespit ederek, 
+//tırnak içindeki değişkenlerin gerçek değerlerini alarak komutların içindeki değişkenleri düzgün bir şekilde hazırlamaktır.
 void	check_quote_var(void)
 {
 	int		i;

@@ -43,6 +43,8 @@ void	fill_and_put(char **av, char **env)
 	signal(SIGINT, sig_int);
 }
 
+//Bu fonksiyonun amacı, her komut arasında bir boru oluşturarak komutlar arasında iletişimi sağlamaktır. 
+//Borular, komutların çıktılarını birbirine bağlar ve bu sayede bir komutun çıktısı, bir sonraki komutun girdisi olarak kullanılabilir.
 void	open_pipes(void)
 {
 	int	i;
