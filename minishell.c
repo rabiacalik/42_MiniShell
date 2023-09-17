@@ -32,15 +32,15 @@ void	minishell_put(void)
 void	fill_and_put(char **av, char **env)
 {
 	(void)av;
-	g_shell.env = ft_strddup(env);
-	declare_init();
+	g_shell.env = ft_strddup(env); //sistem envlerini kendi şeyimize kopyaladık
+	declare_init(); // envrleri tırnaklayıp alfabetik sıraladık 
 	g_shell.p_cnt = 0;
 	g_shell.exit_status = 0;
-	g_shell.prompt = ft_strdup("< Shell > "); // imlecimis
+	g_shell.prompt = ft_strdup("< Shell > "); // imlecimiz
 	g_shell.save_fd = (int *)ft_calloc(2, sizeof(int));
 	g_shell.heredocpipe = (int *)malloc(sizeof(int) * 2);
 	minishell_put();
-	signal(SIGINT, sig_int);
+	signal(SIGINT, sig_int); // ctrl+c
 }
 
 //Bu fonksiyonun amacı, her komut arasında bir boru oluşturarak komutlar arasında iletişimi sağlamaktır. 
@@ -78,7 +78,7 @@ int	main(int ac, char **av, char **env)
 			free(g_shell.line);
 			g_shell.line = NULL;
 		}
-		g_shell.line = readline(g_shell.prompt);
+		g_shell.line = readline(g_shell.prompt); // shel prompt dan sonrasını oku
 		if (g_shell.line == NULL)
 			shell_exit();
 		if (g_shell.line[0] == '\0')

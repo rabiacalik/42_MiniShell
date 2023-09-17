@@ -63,7 +63,9 @@ void	fix_var(char *s)
 	}
 }
 
+// tek tırnaklar ve çift tırnaklar arasına bakıyor
 // tek tırnak içerisinde dolar işareti varsa onu backtick yap
+// çif tırnaksa atla ve bir şey yapma
 void	quotes_state(char *s, int i, int *j, char c)
 {
 	(*j)++;
@@ -75,7 +77,7 @@ void	quotes_state(char *s, int i, int *j, char c)
 	}
 }
 
-void	pass(char *s, int *i, char c)
+void	 pass(char *s, int *i, char c)
 {
 	(*i)++;
 	while (s[*i] && s[*i] != c)

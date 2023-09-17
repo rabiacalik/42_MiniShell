@@ -82,7 +82,7 @@ void	split_pipe(char *s, int i)
 	j = 0;
 	while (s[i + j])
 	{
-		while (s[i + j] != '|' && s[i + j])
+		while (s[i + j] != '|' && s[i + j]) //
 		{
 			if (s[i + j] == '\"')
 				quotes_state(s, i, &j, '\"');
@@ -143,7 +143,7 @@ void	parsing(void)
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] == '\"' || s[i] == '\'')
+		if (s[i] == '\"' || s[i] == '\'') //tırnak arasını atlıyor (nedennn !!!!!)
 			pass(s, &i, s[i]);
 		if (s[i] == '|')
 			g_shell.p_cnt++;

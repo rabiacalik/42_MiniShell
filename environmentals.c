@@ -109,7 +109,7 @@ void	my_export(void)
 void	sig_int(int sig)
 {
 	(void)sig;
-	ft_putstr_fd("\b\b  ", 2);
+	ft_putstr_fd("\b\b  ", 2);  // burada ne yapılıyor !!!!!!!!!!
 	ft_putstr_fd("\n", 2);
 	ft_putstr_fd(g_shell.prompt, 2);
 }

@@ -61,7 +61,7 @@ void	declare_add(char *s)
 	while (++j < i)
 		n_dec[j] = g_shell.declares[j];
 	str = ft_strdup(s); //neden str ye s yi kopyalıyorsun !!!!!
-	n_dec[i] = declare_add_quotes(str);
+	n_dec[i] = declare_add_quotes(str); //stringin tırnaklı hali döndü
 	if (g_shell.declares)
 		free(g_shell.declares);
 	g_shell.declares = n_dec;
