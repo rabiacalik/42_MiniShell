@@ -12,6 +12,9 @@
 
 #include "minishell.h"
 
+/*
+	standart çıktıya yazdırır ve alt satıra geçer
+*/
 static void	echo_without_option(char **strings)
 {
 	int	i;
@@ -28,6 +31,9 @@ static void	echo_without_option(char **strings)
 	g_shell->exit_status = EXIT_SUCCESS;
 }
 
+/*
+	standart çıktıya yazdırır
+*/
 static void	echo_with_option(char **strings)
 {
 	int	i;
@@ -43,6 +49,9 @@ static void	echo_with_option(char **strings)
 	g_shell->exit_status = EXIT_SUCCESS;
 }
 
+/*
+	echo nun "sade" veya "-n" li kullanımına göre standart çıktıya yazdırılmasını sağlar
+*/
 void	execute_echo(char **strings)
 {
 	if (strings[1] != NULL && ft_strncmp("-n", strings[1], 3) == 0)

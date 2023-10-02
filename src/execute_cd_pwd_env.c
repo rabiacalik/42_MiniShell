@@ -12,6 +12,13 @@
 
 #include "minishell.h"
 
+/*
+	OLDPWD = kullanıcı mevcut çalışma dizinini değiştirdiğinde 
+			 önceki çalışma dizininin bilgisini içerir.
+
+	çalışma dizini önceden varsa değerini günceller, daha önceden yoksa listeye ekler (add_or_update_env_variable)
+
+*/
 static void	update_old_pwd(char *old_pwd, char *new_pwd)
 {
 	t_env	*env;
@@ -34,6 +41,14 @@ static void	update_old_pwd(char *old_pwd, char *new_pwd)
 	}
 }
 
+/*
+	getcwd = çalışan programın dizinini döndürür
+	chdir = mevcut çalışma dizinini değiştirmek için kullanılır
+
+	eğer komut argümanı belirtilmemişse önceki dizini güncele ve home dizinine git
+	eğer - işareti kullanılmışsa önceki dizine geçiş yapılır
+	diğer durumlarda belirtilen dizine git
+*/
 void	execute_cd(char **strings)
 {
 	char	*pwd;
@@ -63,6 +78,9 @@ void	execute_cd(char **strings)
 	free(pwd);
 }
 
+/*
+	şu anki çalışma dizinini ekrana yazdırır
+*/
 void	execute_pwd_without_options(void)
 {
 	char	*current_directory;
@@ -79,6 +97,9 @@ void	execute_pwd_without_options(void)
 	g_shell->exit_status = EXIT_SUCCESS;
 }
 
+/*
+	tüm env leri ekrana yazdırır ve çıkış durumlarını ayarlar 
+*/
 void	execute_env_without_options(void)
 {
 	t_env	*env;

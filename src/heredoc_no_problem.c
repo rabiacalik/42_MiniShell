@@ -12,6 +12,10 @@
 
 #include "minishell.h"
 
+/*
+	command ifadesi beliirtilen cat, head, tail, sort ile başlıyorsa
+	return 1 döner yoksa return 0 döner
+*/
 static int	is_heredocs_comamnd(char *command)
 {
 	if (ft_strncmp(command, "cat", 4) == 0
@@ -24,6 +28,11 @@ static int	is_heredocs_comamnd(char *command)
 	return (0);
 }
 
+/*
+	heredoc için grep durumunu kontrol eder
+	grep = belirli bir şeyi aramak için kullanılır
+	cat dosya.txt | grep "belirli_metin"
+*/
 static int	is_heredocs_grep(t_token *token)
 {
 	if (g_shell->heredoc_count > 0 && ft_strncmp(token->value, "grep", 5) == 0
@@ -35,6 +44,9 @@ static int	is_heredocs_grep(t_token *token)
 	return (0);
 }
 
+/*
+	grep işlemi yeni bir heredok işlemi var mı kontrol eder
+*/
 int	heredoc_no_problem(t_token *token, int *pipe_fd)
 {
 	while (token != NULL && token->next != NULL && token->type != PIPE_TYPE)

@@ -12,6 +12,9 @@
 
 #include "minishell.h"
 
+/*
+	ortam değişkenlerini kaldırmak için kullanılır
+*/
 void	execute_unset(char **strings)
 {
 	int		i;
@@ -31,6 +34,9 @@ void	execute_unset(char **strings)
 	g_shell->exit_status = 0;
 }
 
+/*
+	kullanıcının ortam değişkenlerini düzenlenmesini sağlar
+*/
 void	execute_export(char **strings)
 {
 	char	**variable;

@@ -12,10 +12,14 @@
 
 #include "minishell.h"
 
+/*
+	önceki dosya işlemleri içerisinde yapılan değişiklikleri geri alır
+	alınan komutları temizler
+*/
 static void	restore_fd_and_clear_commands(char **commands)
 {
 	g_shell->file_error_found = 0;
-	dup2(g_shell->dup_fd[0], STDIN_FILENO);
+	dup2(g_shell->dup_fd[0], STDIN_FILENO); //STDERR_FILENO tanımlayıcısını g_shell.dup_fd[0] ile aynı hale getirir
 	close(g_shell->dup_fd[0]);
 	dup2(g_shell->dup_fd[1], STDOUT_FILENO);
 	close(g_shell->dup_fd[1]);
@@ -55,7 +59,7 @@ static void	execute_with_pipe(t_token *before_pipe, t_token *pipe_token,
 		g_shell->exit_status = 2;
 		return ;
 	}
-	g_shell->dup_fd[0] = dup(STDIN_FILENO);
+	g_shell->dup_fd[0] = dup(STDIN_FILENO);  //!!!!!
 	g_shell->dup_fd[1] = dup(STDOUT_FILENO);
 	if (heredoc_no_problem(before_pipe, pipe_fd))
 		create_pipe(pipe_token, pipe_fd);

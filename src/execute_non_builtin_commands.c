@@ -12,6 +12,15 @@
 
 #include "minishell.h"
 
+/*
+	start ile dosya yolunu struct start türündeki buffer içerisine doldurur
+	yapı; dosyanın boyutu, izinleri oluşturulma tarihi gibi bilgileri içerir
+
+	 st_mode'un S_IFMT ile AND işlemi sonucunda sadece dosya türü bitleri alınır
+	 S_IFDIR (dizin) olup olmadığı kontrol edilir
+
+	 sadece kullanıcının dosyayı yürütme izni varsa (S_IXUSR), koşul sağlanmış olur.
+*/
 static int	command_path_is_executable(char *command_path)
 {
 	struct stat	buffer;
@@ -25,6 +34,12 @@ static int	command_path_is_executable(char *command_path)
 	return (0);
 }
 
+/*
+	comman ve path_part eşleşiyorsa path_part ı döner
+	command "/" ile başlamıyorsa part_path ile eşleşmiyorsa, path_partın
+	sonuna / eklenerek command ile birleştirilir
+	command / ile başlıyorosa zaten bir yoldur ve direkt döndürülür
+*/
 static char	*find_command_path(char *command, char *path_part)
 {
 	char	*command_path;
@@ -49,6 +64,14 @@ static char	*find_command_path(char *command, char *path_part)
 	return (command_path);
 }
 
+/*
+	kullanılan split ile ayırma işleminin amacı
+	"/usr/bin:/bin:/usr/local/bin" gibi bir PATH değeri, bu satırın işlemi sonucunda 
+	["/usr/bin", "/bin", "/usr/local/bin"] gibi bir dizi elde eder.
+
+	find_command_path: Belirtilen klasör yolu ve komut adını kullanarak tam bir dosya yolu oluşturur.
+	command_path_is_executable: Belirtilen dosya yolunun çalıştırılabilir olup olmadığını kontrol eder.
+*/
 static char	*get_executable_path(char **commands, char *path_env_value)
 {
 	char	**paths;
@@ -75,6 +98,20 @@ static char	*get_executable_path(char **commands, char *path_env_value)
 	return (command_executable_path);
 }
 
+/*
+	fork() ile child proccess oluşturur ve id sini pid içerisine kaydeder
+	pid == 0 --> çocuk süreç
+	pid > 0  --> ebeveyn süreç
+	pid < 0  --> hata durumu
+
+	execve(command_path, commands, NULL) --> bir dosyayı başka bir dosya ile değiştirmek ve yeni
+	programı çalıştırmak için kullanılır
+
+	waitpid(pid, &result, 0) --> pid durumu beklenir ve sonucu result içerisine kaydedilir
+
+	WIFEXITED = wait tarafından döndürülen durum bilgisini incelemek için kullanılan bir makrodur
+	WIFEXSTATUS = çıkış durumu
+*/
 static void	execute_non_builtin_command_helper(char **commands,
 	char *command_path)
 {

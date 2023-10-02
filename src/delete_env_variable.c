@@ -12,6 +12,9 @@
 
 #include "minishell.h"
 
+/*
+	env değerini temizler
+*/
 static void	clear_env_variable(t_env *env)
 {
 	free(env->name);
@@ -20,6 +23,10 @@ static void	clear_env_variable(t_env *env)
 	env = NULL;
 }
 
+/*
+	env değeri başlangıç ise direkt siler
+	diğer durumda variable_name değişkenini arar bulunca da siler
+*/
 void	delete_env_variable(char *variable_name)
 {
 	t_env	*temp_env;

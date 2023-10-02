@@ -46,6 +46,9 @@ static char	*word_dup(const char *str, int start, int finish)
 	return (word);
 }
 
+/*
+	gönderilen diziyi delimiter a göre farklı dizilere böler
+*/
 char	**ft_split(char const *s, char c)
 {
 	int		i;

@@ -12,6 +12,9 @@
 
 #include "minishell.h"
 
+/*
+	PATH değerini arayıp unun değerini geri döner
+*/
 char	*get_path_env_value(void)
 {
 	char	*path_env_value;

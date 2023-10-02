@@ -12,6 +12,9 @@
 
 #include "minishell.h"
 
+/*
+	t_env yi bir sonraki t_env ye taşır
+*/
 static t_env	*get_last_env(t_env *env)
 {
 	if (env == NULL)
@@ -21,6 +24,9 @@ static t_env	*get_last_env(t_env *env)
 	return (env);
 }
 
+/*
+	listeye yeni env ekler
+*/
 void	add_env_to_list(t_env **env, t_env *new_env)
 {
 	if (new_env == NULL)
@@ -33,6 +39,10 @@ void	add_env_to_list(t_env **env, t_env *new_env)
 	get_last_env(*env)->next = new_env;
 }
 
+/*
+	paremetre olarak gönderilen value, name içerisinde varsa, name değeri güncellenir
+	eğer içerisinde yoksa listeye yeni env olarak eklenir(add_env_to_list)
+*/
 void	add_or_update_env_variable(char *name, char *value)
 {
 	t_env	*env;

@@ -39,6 +39,9 @@ void	clear_token_list(t_token **token_list)
 	free(*token_list);
 }
 
+/*
+	env listesini free ler
+*/
 void	clear_env_list(t_env **env_list, int env_count)
 {
 	int	i;

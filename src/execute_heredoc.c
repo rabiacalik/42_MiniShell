@@ -19,6 +19,17 @@ static void	print_error(char *delimiter)
 		delimiter);
 }
 
+// hero document 👇
+/*
+	"Here document" (burada belgesi), bir programın standart girişine doğrudan bir metin bloğu sağlamak için 
+	kullanılan bir bash kabuk özelliğidir. Bir komut satırında, bir komutun girişini elle belirlemek için 
+	<< operatörü kullanılır.
+*/
+/*
+	"temp_token" içerisindeki çevresel değişken ve tilda ifadelerini uygun değerlerle değiştirir
+	temizlenmiş "temp_token"ı belirtilen dosya tanımlayıcısına(fd) yazarak "here document" içeriğini oluşturur
+	geçici tokenları temizlemek için "clear_temp_token" fonksiyonu çağırılır
+*/
 static void	heredoc_handler_helper(int fd, char **temp_token, char *line)
 {
 	change_all_env_variable_to_value(temp_token);
@@ -67,6 +78,18 @@ static void	readable_for_heredoc(char *file_name, t_token *token)
 	}
 }
 
+/*
+	heredoc_handler("END", fd);
+	Bu örnekte, END belirleyicisi ile sınırlı bir here document işlemi yapılır. Kullanıcıya >
+	ifadesiyle bir girdi beklenir ve her girdi satırını heredoc_handler_helper fonksiyonu 
+	aracılığıyla belirtilen dosyaya yazar. Kullanıcı END yazana kadar bu işlem devam eder.
+*/
+
+/*
+	1- kullanıcıdan girdi satırını alır (get_next_line ile)
+	2- girdi satırı belirtilen belirleyiciyle (delimiter) eşitse yada null ise döngüyü sonlandırır
+	3- (heredoc_handler_helper) çevresel değişkenler değerlendirilir ve girdi belirtilen dosyaya yazılır
+*/
 static void	heredoc_handler(char *delimiter, int fd)
 {
 	char	*line;
@@ -95,11 +118,17 @@ static void	heredoc_handler(char *delimiter, int fd)
 	close(fd);
 }
 
+/*
+	"here document" işlemi gerçekleştirir ve ardından bu belgenin içeriğini
+	bir dosyaya yazarak bu dosyayı okunabilir hale getirir
+*/
 void	execute_heredoc(char *file_name, t_token *token, int *heredoc_count)
 {
 	int	fd;
 
 	*heredoc_count += 1;
+
+	// O_TRUNC dosyayı boş bir dosya olarak açar
 	fd = open("bin/.heredoc_temp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
 	{

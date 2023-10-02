@@ -12,10 +12,35 @@
 
 #include "minishell.h"
 
+/*
+	dosyayı açar ve dosya tanımlayıcısını değiştirir
+	(dup2 ile) ve dosyayı kapatır
+*/
 static void	writable(char *file_name, int flag)
 {
 	int	fd;
 
+/*
+	
+Octal (sekizlik) sayı sistemine göre 
+ifade edilen izinlerin örnekleri şu şekildedir:
+
+0644: rw-r--r--
+
+Sahip: Okuma ve yazma izinleri
+Diğer: Sadece okuma izni
+0755: rwxr-xr-x
+
+Sahip: Okuma, yazma ve çalıştırma izinleri
+Diğer: Sadece okuma ve çalıştırma izinleri
+0700: rwx------
+
+Sadece sahip kullanıcıya tam izin
+
+	0644: Dosyanın izinlerini belirten bir oktal sayı. 
+	Burada 0644 genellikle dosyanın sahibine yazma ve okuma izni verirken, 
+	diğer kullanıcılara sadece okuma izni verir.
+*/
 	fd = open(file_name, flag, 0644);
 	if (fd == -1)
 	{
@@ -28,6 +53,10 @@ static void	writable(char *file_name, int flag)
 	close(fd);
 }
 
+/*
+	dosyayı okuma modunda açar ve
+	dosya tanımlayıcısını (file_desciriptor)
+*/
 static void	readable(char *file_name)
 {
 	int	fd;
@@ -44,6 +73,11 @@ static void	readable(char *file_name)
 	close(fd);
 }
 
+/*
+	token içerisinde dolaşarak hata var mı yok mu kontrol eder
+	eğer bir yönlendirme varsa ve devamında başka bir token yoksa hata verir
+	eğer bir yönlendirme varsa ve sonraki token bir dosya tipi değils hata verir
+*/
 int	redirect_file_is_wrong(t_token *token)
 {
 	t_token	*temp_token;

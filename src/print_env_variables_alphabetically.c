@@ -12,6 +12,9 @@
 
 #include "minishell.h"
 
+/*
+	envleri sayısını döner
+*/
 static int	get_env_variables_count(void)
 {
 	int		count;
@@ -27,6 +30,9 @@ static int	get_env_variables_count(void)
 	return (count);
 }
 
+/*
+	env listesinin bir kopyasını oluşturup döner
+*/
 static t_env	**get_copy_env_list(int env_count)
 {
 	int		i;
@@ -53,6 +59,9 @@ static t_env	**get_copy_env_list(int env_count)
 	return (env_list);
 }
 
+/*
+	listedeki elemanları alfabetik sıra ile sıralar
+*/
 static void	sort_env_list(t_env **env_list, int env_count)
 {
 	int		len;
@@ -79,6 +88,9 @@ static void	sort_env_list(t_env **env_list, int env_count)
 	}
 }
 
+/*
+	alfabetik olarak sıralr ve declare-x formatında ekrena yazdırır
+*/
 void	print_env_variables_alphabetically(void)
 {
 	t_env	**env_list;

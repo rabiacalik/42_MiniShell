@@ -12,6 +12,9 @@
 
 #include "minishell.h"
 
+/*
+	command_type ve builtin_type olan tokenların sayısını döner
+*/
 static int	get_commands_length(t_token *token)
 {
 	int	length;
@@ -26,6 +29,9 @@ static int	get_commands_length(t_token *token)
 	return (length);
 }
 
+/*
+	pipe dan önceki komutları döner
+*/
 char	**get_commands_before_pipe(t_token *before_pipe)
 {
 	char	**commands;
@@ -52,6 +58,10 @@ char	**get_commands_before_pipe(t_token *before_pipe)
 	return (commands);
 }
 
+/*
+	Bu fonksiyon, bir pipeline işlemi sırasında son komutun ardından 
+	kullanıcıdan ek bir giriş alarak işlemi devam ettirmek için kullanılır.
+*/
 void	last_pipe_handler(void)
 {
 	char	*command;
@@ -62,14 +72,14 @@ void	last_pipe_handler(void)
 			"bash: syntax error near unexpected token `|'\n");
 		return ;
 	}
-	if (g_shell->exit_status == 2)
+	if (g_shell->exit_status == 2) // Sıgint sinyali alınmışsa
 		return ;
 	while (1)
 	{
-		command = readline("> ");
-		if (command == NULL)
+		command = readline("> "); // kullanıcıdan giriş beklenir
+		if (command == NULL) // ctrl+d
 			return ;
-		if (*command == '\0')
+		if (*command == '\0') //enter
 		{
 			free(command);
 			continue ;
