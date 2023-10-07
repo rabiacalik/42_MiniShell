@@ -12,6 +12,7 @@
 
 #include "minishell.h"
 
+// açılan tırnak laar kapatılmışmı
 static int	quotes_check(char *command)
 {
 	char	quote;

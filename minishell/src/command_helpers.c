@@ -3,18 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   command_helpers.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spirnaz <spirnaz@student.42kocaeli.com.tr    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 18:18:29 by spirnaz            #+#    #+#             */
-/*   Updated: 2023/06/20 14:30:52 by spirnaz           ###   ########.fr       */
+/*   Created: 2023/10/07 13:09:53 by marvin            #+#    #+#             */
+/*   Updated: 2023/10/07 13:09:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-	komut satırında bulunan toplam pipe ve yönlendirme işaretlerinin sayisini döndürür
-*/
 int	pipe_redirection_count(char *command)
 {
 	int	count;
@@ -36,9 +33,6 @@ int	pipe_redirection_count(char *command)
 	return (count);
 }
 
-/*
-	çift tırnak yada tek tırnak içerisinde yer alan karakterleri atlar
-*/
 char	*skip_quotes(char *str)
 {
 	char	quote;
@@ -53,9 +47,6 @@ char	*skip_quotes(char *str)
 	return (str);
 }
 
-/*
-	belirtilen  | < > karakterleri atlanır
-*/
 char	*skip_pipe_redirection(char *str)
 {
 	while (*str != '\0' && ft_strchr("|<>", *str))
@@ -63,11 +54,6 @@ char	*skip_pipe_redirection(char *str)
 	return (str);
 }
 
-/*
-	commandın başında tek veya çift tırnak varsa skip_code gider
-	commandın başında |<> varsa skip_pipe_redirection a gider
-	yada bu karakterleri atlayarak komutun uzunluğunu döner
-*/
 int	word_len(char *command)
 {
 	int		len;
